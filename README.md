@@ -9,4 +9,4 @@ Here is my first Django project, even if I tried to use the best practice, there
 > cd Library
 
 ### Run the project
-> python3 manage.py runserver
+> python3 manage.py -r runserver
