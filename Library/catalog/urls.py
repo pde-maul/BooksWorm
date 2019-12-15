@@ -1,0 +1,41 @@
+from django.urls import path, re_path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('books/', views.BookListView, name='books'),
+    path('books/<str:sorted_by>', views.BookListView, name='books'),
+
+    # path('books/', views.BookListView.as_view(), name='books'),
+    path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
+    path('authors/', views.AuthorListView.as_view(), name='authors'),
+    path('author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
+    path('review/<int:pk>', views.ReviewDetailView.as_view(), name='review-detail'),
+    path('myreviews/', views.ReviewBooksByUserListView.as_view(), name='my-reviews'),
+]
+
+# To add/modify/delete an author
+urlpatterns += [  
+    path('author/create/', views.AuthorCreate.as_view(), name='author_create'),
+    path('author/<int:pk>/update/', views.AuthorUpdate.as_view(), name='author_update'),
+    path('author/<int:pk>/delete/', views.AuthorDelete.as_view(), name='author_delete'),
+]
+
+# To add/modify/delete a book
+urlpatterns += [  
+    path('book/create/', views.BookCreate.as_view(), name='book_create'),
+    path('book/<int:pk>/update/', views.BookUpdate.as_view(), name='book_update'),
+    path('book/<int:pk>/delete/', views.BookDelete.as_view(), name='book_delete'),
+]
+
+# To add/modify/delete a review
+urlpatterns += [  
+    # path('review/create/', views.ReviewCreate.as_view(), name='review_create'),
+    path('review/create/', views.ReviewCreate, name='review_create'),
+    path('review/<int:pk>/update/', views.ReviewUpdate.as_view(), name='review_update'),
+    path('review/<int:pk>/delete/', views.ReviewDelete.as_view(), name='review_delete'),
+]
+
+urlpatterns += [  
+    path('signup/', views.SignupView, name='signup'),
+]

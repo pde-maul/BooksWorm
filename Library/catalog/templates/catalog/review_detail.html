@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Review by: {{ review.review_author }} </h1>
+
+<div style="margin-left:20px;margin-top:20px">
+        <h4>{{ review.review_title  }}</h4>
+        <p><strong>Rate : </strong> {{ review.review_rate }}</p>
+          <p><strong>Explanation:</strong> {{ review.review_text }}</p>
+          <p class="text-muted"><strong>Name of the book:</strong> {{ review.book_rated }}</p>
+              {% if review.review_author %}
+                <p class="text-muted"><strong>Author:</strong> {{ review.review_author }}</p>
+                {% else %}
+                <p>Anonymous review</p>
+              {% endif %}  
+      </li>
+      <a href="{% url 'review_update' review.pk %}">Modify this review</a>
+      <br>
+      <a href="{% url 'review_delete' review.pk %}">Delete this review</a> 
+      <br>
+      <a href="{% url 'review_create'%}">Create a review</a> 
+      <hr>
+</div>
+{% endblock %}

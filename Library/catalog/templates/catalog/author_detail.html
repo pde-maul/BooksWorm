@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Author: {{ author }} </h1>
+
+<div style="margin-left:20px;margin-top:20px">
+<h4>Books</h4>
+
+<dl>
+{% for book in author.book_set.all %}
+  <dt><a href="{% url 'book-detail' book.pk %}">{{book}}</a> ({{book.year_publishing}})</dt>
+  <dd>{{book.summary}}</dd>
+  <hr>
+{% endfor %}
+</dl>
+<hr>
+  <br>
+  <a href="{% url 'author_update' author.pk %}">Modify this author</a>
+  <br>
+  <a href="{% url 'author_delete' author.pk %}">Delete this author</a>
+  <br>
+  <a href="{% url 'author_create' %}">Add an author</a>
+  <br>
+  <a href="{% url 'book_create' %}">Add a book</a>
+</div>
+{% endblock %}

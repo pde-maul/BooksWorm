@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Book List</h1>
+  {% if book_list %}
+
+  <a href="{% url 'books' sorted_by='rating' %}">Sort by ratings</a>
+  <a href="{% url 'books' sorted_by='author' %}">Sort by authors</a>
+  <ul>
+    {% for book in book_list %}
+      <li>
+        <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{ book.author }})
+        <p>Rating average : {{ book.rating }}</p>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}
+  <hr>
+  <a href="{% url 'author_create' %}">Add an author</a>
+  <br>
+  <a href="{% url 'book_create' %}">Add a book</a>     
+{% endblock %}

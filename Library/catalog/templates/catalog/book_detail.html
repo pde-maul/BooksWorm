@@ -1,0 +1,42 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Title: {{ book.title }}</h1>
+
+  <p><strong>Author:</strong> <a href="{% url 'author-detail' book.author.pk %}">{{ book.author }}</a></p> <!-- author detail link not yet defined -->
+  <p><strong>Summary:</strong> {{ book.summary }}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <br>
+    <h3>Review</h3>
+    {% if book.review_set.all %}
+        {% for review in book.review_set.all %}
+          <hr>
+          <h5>{{ review.review_title }}</h5>
+          </p>
+          <p><strong>Rate : </strong> {{ review.review_rate }}</p>
+          <p><strong>Explanation:</strong> {{ review.review_text }}</p>
+          <p class="text-muted"><strong>Name of the book:</strong> {{ review.book_rated }}</p>
+              {% if review.review_author %}
+                <p class="text-muted"><strong>Author:</strong> {{ review.review_author }}</p>
+                {% else %}
+                <p>Anonymous review</p>
+              {% endif %} 
+
+        {% endfor %}
+    {% else %}
+    <p>There are no review yet for this book.</p>
+  {% endif %} 
+  <a href="{% url 'review_create'%}">Create a review</a> 
+  <hr>
+  <br>
+  <a href="{% url 'book_update' book.pk %}">Modify this book</a>
+  <br>
+  <a href="{% url 'book_delete' book.pk %}">delete this book</a>
+  <br>
+  <a href="{% url 'author_create' %}">Add an author</a>
+  <br>
+  <a href="{% url 'book_create' %}">Add a book</a>
+
+  </div>
+{% endblock %}
